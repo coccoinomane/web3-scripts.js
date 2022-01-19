@@ -11,9 +11,11 @@ if (!txHash) {
 }
 
 // DO
-web3.eth.getTransactionReceipt(txHash).then((receipt) => {
-    console.log(">>> TX RECEIPT")
-    console.log(receipt)
-    console.log(">>> DECODED LOGS")
-    console.log(abiDecoder.decodeLogs(receipt.logs))
+web3.eth.getTransaction(txHash).then((tx) => {
+    console.log(">>> TX")
+    console.log(tx)
+    console.log(">>> INPUT")
+    console.log(tx.input)
+    console.log(">>> DECODED INPUT")
+    console.log(web3.utils.hexToAscii(tx.input))
 });
