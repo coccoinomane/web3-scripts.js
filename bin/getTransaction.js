@@ -10,6 +10,9 @@ if (!txHash) {
     throw new Error("Provide txHash")
 }
 
+// const abi = JSON.parse('[{"type":"function","name":"startGame","inputs":[{"name":"teamId","type":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"closeGame","inputs":[{"name":"gameId","type":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"reinforceDefense","inputs":[{"name":"gameId","type":"uint256"},{"name":"crabadaId","type":"uint256"},{"name":"borrowPrice","type":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"reinforceAttack","inputs":[{"name":"gameId","type":"uint256"},{"name":"crabadaId","type":"uint256"},{"name":"borrowPrice","type":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"attack","inputs":[{"name":"gameId","type":"uint256"},{"name":"attackTeamId","type":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"settleGame","inputs":[{"name":"gameId","type":"uint256"}],"outputs":[],"stateMutability":"nonpayable"}]')
+const types = ['uint256', 'uint256', 'uint256']
+
 // DO
 web3.eth.getTransaction(txHash).then((tx) => {
     console.log(">>> TX")
@@ -17,5 +20,7 @@ web3.eth.getTransaction(txHash).then((tx) => {
     console.log(">>> INPUT")
     console.log(tx.input)
     console.log(">>> DECODED INPUT")
-    console.log(web3.utils.hexToAscii(tx.input))
+    console.log(web3.eth.abi.decodeParameters(types, tx.input))
+    // console.log(web3.eth.abi.decodeParameters(abi, tx.input))
+    // console.log(web3.utils.hexToAscii(tx.input))
 });
